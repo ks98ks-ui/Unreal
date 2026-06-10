@@ -1,0 +1,41 @@
+# Visual Studio temporary files
+.vs/
+*.VC.db
+*.VC.opendb
+*.suo
+*.opensdf
+*.sdf
+
+# Compiled source files for the engine and game
+Binaries/
+Plugins/*/Binaries/
+
+# Builds
+Build/*
+!Build/*.ico
+!Build/**/*.ico
+
+# Unreal generated intermediate files
+Intermediate/
+Plugins/*/Intermediate/
+
+# Cached asset data
+DerivedDataCache/
+
+# Saved data and logs
+Saved/
+
+# Packaged output
+Windows/
+Linux/
+Mac/
+
+# IDE project files
+*.xcodeproj
+*.xcworkspace
+*.sln
+*.sln.DotSettings
+
+# Crash dumps and logs
+*.log
+*.dmp
