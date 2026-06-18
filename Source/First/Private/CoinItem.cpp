@@ -1,5 +1,7 @@
 
 #include "CoinItem.h"
+#include "Engine/World.h"
+#include "PolytechGameStateBase.h"
 
 ACoinItem::ACoinItem()
 {
@@ -11,7 +13,15 @@ void ACoinItem::ActivateItem(AActor* Activator)
     // 플레이어 태그 확인
 	if (Activator && Activator->ActorHasTag("Player"))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, FString::Printf(TEXT("Overlap!!")));
+		if (UWorld* World = GetWorld())
+		{
+			if (APolytechGameStateBase* GameState = World->GetGameState<APolytechGameStateBase>())
+			{
+				GameState->AddScore(PointValue);
+				GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, FString::Printf(TEXT("Overlap!! :: COIN")));
+			}
+
+		}
 
 		//아이템 파괴 함수 호출
 		DestroyItem();

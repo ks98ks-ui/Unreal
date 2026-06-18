@@ -23,6 +23,14 @@ Blueprint 에셋, 맵, 애니메이션, 사운드 같은 콘텐츠와 함께 직
 3. Visual Studio 또는 Unreal Editor에서 빌드 후 실행합니다.
 4. 에디터 안에서 게임플레이 동작을 테스트합니다.
 
+## 2026-06-18 작업 내용
+
+- `PolytechGameStateBase` C++ 클래스와 `BP_PolytechGameStateBase` 블루프린트를 추가했습니다.
+- `BP_SpawnVolume1`, `BP_SpawnVolume2`, `BP_SpawnVolume3` 블루프린트를 추가해 스폰 볼륨 구성을 확장했습니다.
+- `노멀`, `어려움`, `헬` 데이터테이블 자산을 추가하고 아이템/스폰 관련 데이터 구성을 보강했습니다.
+- `FirstGameMode`, `FirstCharacter1`, `CoinItem`, `MineItem`, `Potion` 관련 C++ 및 블루프린트 로직을 수정했습니다.
+- 여러 맵, 외부 액터, 에셋 저장본이 함께 업데이트되었습니다.
+
 ## Git 관리
 
 이 저장소는 큰 Unreal 에셋 파일 관리를 위해 Git LFS를 사용합니다.

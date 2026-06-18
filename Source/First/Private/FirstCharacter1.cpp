@@ -36,6 +36,9 @@ AFirstCharacter1::AFirstCharacter1()
 
 	GetCharacterMovement()->MaxWalkSpeed = NomalSpeed;
 
+	MaxHealth = 100.f;
+	Health = MaxHealth;
+
 }
 
 // Called when the game starts or when spawned
@@ -127,6 +130,7 @@ void AFirstCharacter1::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	}
 }
 
+
 void AFirstCharacter1::Move(const FInputActionValue& value)
 {
 	//컨트롤러가 있어야 방향계산이 가능하므로 컨트롤러가 없는경우 return
@@ -198,3 +202,34 @@ void AFirstCharacter1::StopSprint(const FInputActionValue& value)
 	}
 }
 
+int32 AFirstCharacter1::GetHealth() const
+{
+	return int32();
+}
+void AFirstCharacter1::AddHealth(float Amount)
+{
+	//체력을 회복시킬 수 있도록 코드 작성. 단 최대체력을 초과할 수 없음.
+	Health = FMath::Clamp(Health + Amount, 0.0f, MaxHealth);
+	UE_LOG(LogTemp, Log, TEXT("Health increased to : %f"), Health);
+}
+
+float AFirstCharacter1::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	// 기본데미지 처리 로직 호출 (optional)
+	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	// 체력을 데미지만큼 감소시키고, 0 이하로 떨어지지 않도록 clamp
+	Health = FMath::Clamp(Health - DamageAmount, 0.0f, MaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("Health decreased to : %f"), Health);
+	// 체력이 0이하가 되면 사망처리
+	if (Health <= 0.0f) 
+	{
+		OnDeath();
+	}
+	// 실제 적용된 데미지 반환
+	return ActualDamage;
+}
+
+void AFirstCharacter1::OnDeath()
+{
+	UE_LOG(LogTemp, Error, TEXT("Character is Dead!"));
+}

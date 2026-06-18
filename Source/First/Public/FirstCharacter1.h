@@ -32,6 +32,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintPure, Category ="Health")
+	int32 GetHealth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void AddHealth(float Amount);
+
 protected:
 	// 스프링암 컴포넌트
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera") //Unreal의 reflection system
@@ -71,5 +77,20 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	float SprintSpeed; //실제 속도
+
+	// 최대체력 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float MaxHealth;
+	// 현재체력
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float Health;
+	// 사망처리 함수(체력이 0 또는 그 이하)
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	virtual void OnDeath();
+	// 데미지 처리 함수(지뢰 폭발 등)
+	virtual float TakeDamage(float DamageAmount,
+		struct FDamageEvent const& DamageEvent,
+		AController* EventInstigator,
+		AActor* DamageCauser) override;
 
 };

@@ -1,9 +1,11 @@
 
 #include "Potion.h"
+#include "FirstCharacter1.h"
+
 
 APotion::APotion()
 {
-	HealAmount = 10.f;
+	HealAmount = 20.f;
 	ItemType = "Healing";
 }
 
@@ -13,6 +15,12 @@ void APotion::ActivateItem(AActor* Activator)
 	
 		if (Activator && Activator->ActorHasTag("Player"))
 		{
+			if (AFirstCharacter1* FirstCharacter1 = Cast<AFirstCharacter1>(Activator))
+			{
+				// 캐릭터의 체력 회복
+				FirstCharacter1->AddHealth(HealAmount);
+			}
+
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, FString::Printf(TEXT("Player Gained %.1f HP!"), HealAmount));
 			DestroyItem();
 		}

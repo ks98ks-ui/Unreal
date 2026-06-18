@@ -1,6 +1,8 @@
 
 #include "MineItem.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 
 AMineItem::AMineItem()
 {
@@ -40,6 +42,16 @@ void AMineItem::Explode()
 	{
 		if (Actor && Actor->ActorHasTag("Player"))
 		{
+			//데미지 발생시켜 Actor의 TakeDamage()을 실행
+			UGameplayStatics::ApplyDamage(
+				Actor,                             //데미지 받을 액터
+				ExplosionDamage,                   //데미지 크기
+				nullptr,                           //데미지 유발한 주체
+				this,                              //데미지를 유발하는 오브젝트
+				UDamageType::StaticClass()         //데미지 유형
+			);
+
+			// 공격사실 알림로그
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, FString::Printf(TEXT("Player Damaged %.1f by MineItem"), ExplosionDamage));
 		}
 	}
