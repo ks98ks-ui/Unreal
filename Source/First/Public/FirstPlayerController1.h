@@ -33,4 +33,13 @@ public:
 	UInputAction* SprintAction;
 
 	virtual void BeginPlay() override;
+
+	//UMG위젯클래스를 에디터에서 할당받아 끼워넣을 변수
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget>HUDWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "UI")
+	UUserWidget* HUDWidgetInstance;
+
+	UFUNCTION(BlueprintPure, Category = "HUD")
+	UUserWidget* GetHUDWidget() const;
 };

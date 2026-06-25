@@ -1,12 +1,16 @@
 #include "FirstPlayerController1.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
+#include "PolytechGameStateBase.h"
 
 AFirstPlayerController1::AFirstPlayerController1()
 	:InputMappingContext(nullptr), 
 	MoveAction(nullptr),
 	JumpAction(nullptr),
 	LookAction(nullptr),
-	SprintAction(nullptr)
+	SprintAction(nullptr),
+	HUDWidgetClass(nullptr),
+	HUDWidgetInstance(nullptr)
 {
 }
 
@@ -29,5 +33,23 @@ void AFirstPlayerController1::BeginPlay()
 			}
 		}
 	}
+	if (HUDWidgetClass) //nullptr이 아닌지 확인
+	{
+		UUserWidget* HUDWidget = CreateWidget<UUserWidget>(this, HUDWidgetClass);
 
+		if (HUDWidget)
+		{
+			HUDWidget->AddToViewport();
+		}
+	}
+	APolytechGameStateBase* PolytechGameState = GetWorld() ? GetWorld()->GetGameState<APolytechGameStateBase>() : nullptr;
+	if (PolytechGameState)
+	{
+		PolytechGameState->UpdateHUD();
+	}
+}
+
+UUserWidget* AFirstPlayerController1::GetHUDWidget() const
+{
+	return nullptr;
 }

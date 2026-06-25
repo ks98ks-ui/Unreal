@@ -31,6 +31,14 @@ Blueprint 에셋, 맵, 애니메이션, 사운드 같은 콘텐츠와 함께 직
 - `FirstGameMode`, `FirstCharacter1`, `CoinItem`, `MineItem`, `Potion` 관련 C++ 및 블루프린트 로직을 수정했습니다.
 - 여러 맵, 외부 액터, 에셋 저장본이 함께 업데이트되었습니다.
 
+## 2026-06-25 작업 내용
+
+- `MyGameModeBase`, `PolytechGameInstance` C++ 클래스를 추가했습니다.
+- `BP_MyGameModeBase` 블루프린트와 `WBP_HUD` 위젯을 추가했습니다.
+- `BP_PolytechGameStateBase`, `BP_FirstPlayerController1`, `BP_MyGameMode`, `BP_MineItem` 블루프린트를 수정했습니다.
+- `HardLevel` 맵과 스폰 볼륨, 플레이어 컨트롤러, 게임모드 관련 C++ 로직을 업데이트했습니다.
+- `DefaultEngine.ini` 설정이 함께 갱신되었습니다.
+
 ## Git 관리
 
 이 저장소는 큰 Unreal 에셋 파일 관리를 위해 Git LFS를 사용합니다.

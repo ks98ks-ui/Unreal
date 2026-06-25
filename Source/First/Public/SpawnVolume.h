@@ -29,12 +29,14 @@ public:
 
 	//특정 아이템 클래스를 스폰하는 함수
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
-	void SpawnItem(TSubclassOf<AActor>ItemClass);
+	//void SpawnItem(TSubclassOf<AActor>ItemClass);
+	AActor* SpawnItem(TSubclassOf<AActor>ItemClass);
 
 	UFUNCTION(BlueprintCallable, Category = "Spawning")
-	void SpawnRandomItem();
-
-
+	//void SpawnRandomItem();
+	AActor* SpawnRandomItem();
+	
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

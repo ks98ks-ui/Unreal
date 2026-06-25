@@ -33,15 +33,17 @@ FVector ASpawnVolume::GetRandomPointInVolume() const
 	);
 }
 
-void ASpawnVolume::SpawnItem(TSubclassOf<AActor> ItemClass)
+AActor* ASpawnVolume::SpawnItem(TSubclassOf<AActor> ItemClass)
 {
-	if (!ItemClass) return; // ItemClass가 아니면 여기서 종료.
+	if (!ItemClass) return nullptr; // ItemClass가 아니면 여기서 종료.
 
-	GetWorld()->SpawnActor<AActor>(
-		ItemClass,
-		GetRandomPointInVolume(),
-		FRotator::ZeroRotator
-	);
+	//SpawnActor 성공하면 스폰된 액터의 포인터가 반환
+	AActor*SpawnedActor = GetWorld()->SpawnActor<AActor>(
+			ItemClass,
+			GetRandomPointInVolume(),
+			FRotator::ZeroRotator
+		);
+	return SpawnedActor;
 }
 
 
@@ -60,15 +62,17 @@ void ASpawnVolume::Tick(float DeltaTime)
 
 }
 
-void ASpawnVolume::SpawnRandomItem()
+AActor* ASpawnVolume::SpawnRandomItem()
 {
 	if (FItemSpawnRow* SelectedRow = GetRandomItem())
 	{
 		if (UClass* ActualClass = SelectedRow->ItemClass.Get())
 		{
-			SpawnItem(ActualClass);
+			return SpawnItem(ActualClass);
 		}
 	}
+
+	return nullptr;
 }
 
 FItemSpawnRow* ASpawnVolume::GetRandomItem() const

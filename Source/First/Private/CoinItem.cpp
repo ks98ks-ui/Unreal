@@ -18,11 +18,10 @@ void ACoinItem::ActivateItem(AActor* Activator)
 			if (APolytechGameStateBase* GameState = World->GetGameState<APolytechGameStateBase>())
 			{
 				GameState->AddScore(PointValue);
+				GameState->OnCoinCollected(); //GameState 의 OnCoinCollected를 작동시켜서 코인획득을 알림
 				GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, FString::Printf(TEXT("Overlap!! :: COIN")));
 			}
-
 		}
-
 		//아이템 파괴 함수 호출
 		DestroyItem();
 	}

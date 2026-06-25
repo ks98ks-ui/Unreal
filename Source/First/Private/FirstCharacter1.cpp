@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "FirstPlayerController1.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PolytechGameStateBase.h"
 
 // Sets default values
 AFirstCharacter1::AFirstCharacter1()
@@ -232,4 +233,5 @@ float AFirstCharacter1::TakeDamage(float DamageAmount, FDamageEvent const& Damag
 void AFirstCharacter1::OnDeath()
 {
 	UE_LOG(LogTemp, Error, TEXT("Character is Dead!"));
+	
 }
